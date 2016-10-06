@@ -6,18 +6,23 @@ using System.Threading.Tasks;
 
 namespace BinaryTrees_N_Hash
 {
+
+    /* Structs */
+    struct UserInfo
+    {
+        public string sName;
+        public string sAddress;
+        public string sPhone;
+    }
+
+    /* Node Class */
     class Node
     {
-        /* Structs */
-        public struct UserInfo
-        {
-            string sName;
-            string sAddress;
-            string sPhone;
-        }
+        /* Unique ID Generator */
+        private uint uUniqueID = 1U;
 
         /* Data Members */
-        public  int      iID;
+        public  uint     uID;
         public  Node     pLeft;
         public  Node     pRight;
         private UserInfo stUserInfo;
@@ -25,7 +30,13 @@ namespace BinaryTrees_N_Hash
         /* Functions */
         public Node()
         {
-            Console.WriteLine("NODE Created");
+            uID    = uUniqueID++;
+            pLeft  = null;
+            pRight = null;
+            stUserInfo.sAddress = "";
+            stUserInfo.sName    = "";
+            stUserInfo.sPhone   = "";
+            Console.WriteLine("Node " + uID);
         }
 
         ~Node()
