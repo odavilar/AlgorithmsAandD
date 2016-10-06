@@ -1,5 +1,0 @@
-C:\Users\uidr9751\Documents\Personal\UAG\Algorithms\Homework\BinaryTrees_N_Hash\BinaryTrees_N_Hash\Program.cs;C:\Users\uidr9751\Documents\Personal\UAG\Algorithms\Homework\BinaryTrees_N_Hash\.klocwork\BinaryTrees_N_Hash\cs.kwlp\ds\1\j2yobslf.cec;1;0;0;1475695385763
-C:\Users\uidr9751\Documents\Personal\UAG\Algorithms\Homework\BinaryTrees_N_Hash\BinaryTrees_N_Hash\BinaryTrees_N_Hash.csproj;;2;0;0;0
-C:\Users\uidr9751\Documents\Personal\UAG\Algorithms\Homework\BinaryTrees_N_Hash\BinaryTrees_N_Hash\App.config;;3;0;0;0
-C:\Users\uidr9751\Documents\Personal\UAG\Algorithms\Homework\BinaryTrees_N_Hash\BinaryTrees_N_Hash\Properties\AssemblyInfo.cs;;4;0;0;0
-C:\Users\uidr9751\Documents\Personal\UAG\Algorithms\Homework\BinaryTrees_N_Hash\BinaryTrees_N_Hash\Node.cs;C:\Users\uidr9751\Documents\Personal\UAG\Algorithms\Homework\BinaryTrees_N_Hash\.klocwork\BinaryTrees_N_Hash\cs.kwlp\ds\5\tzlmkqxn.mqa;5;0;0;1475696141757
