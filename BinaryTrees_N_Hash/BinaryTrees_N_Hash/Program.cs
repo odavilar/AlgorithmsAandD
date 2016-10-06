@@ -10,7 +10,7 @@ namespace BinaryTrees_N_Hash
     {
         static void Main(string[] args)
         {
-            Node cNode = new Node();
+            HashTable<double> myHT = new HashTable<double>();
             Console.WriteLine("HELLO WORLD");
             Console.ReadKey();
         }
