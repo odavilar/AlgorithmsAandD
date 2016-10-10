@@ -14,45 +14,38 @@ namespace BinaryTrees_N_Hash
 
     public class HashTable
     {
-        public Node[] au32Array;
+        public BTree[] acArray;
 
         /* Constructor */
         public HashTable()
         {
-            au32Array = new Node[HTConst.u32DefaultSize];
-            Console.WriteLine("HashTable with size " + HTConst.u32DefaultSize + " has been created");
+            acArray = new BTree[HTConst.u32DefaultSize];
         }
 
         public HashTable(UInt32 u32Size)
         {
-            au32Array = new Node[u32Size];
-            Console.WriteLine("HashTable with size " + u32Size + "has been created");
+            acArray = new BTree[u32Size];
         }
 
         private uint HashFunction(UInt32 u32ID)
         {
-            return FNV1a.u32Compute(u32ID) % (UInt32)au32Array.Length;
+            return FNV1a.u32Compute(u32ID) % (UInt32)acArray.Length;
         }
 
         /* Destructor */
         ~HashTable()
         {
-            Console.WriteLine("HashTable Destroyed");
         }
 
         public void Add(Node cNode)
         {
             UInt32 u32HashTableIndex = 0;
             u32HashTableIndex = HashFunction(cNode.uGetID());
-            if (au32Array[u32HashTableIndex] == null)
+            if (acArray[u32HashTableIndex] == null)
             {
-                au32Array[u32HashTableIndex] = cNode;
-                Console.WriteLine("Index Empty");
+                acArray[u32HashTableIndex] = new BTree();
             }
-            else
-            {
-                Console.WriteLine("Index Already Used");
-            }
+            acArray[u32HashTableIndex].vInsertData(cNode);
         }
 
         public void Delete(UInt32 u32ID)
@@ -60,15 +53,13 @@ namespace BinaryTrees_N_Hash
             UInt32 u32HashTableIndex = 0;
 
             u32HashTableIndex = HashFunction(u32ID);
-
-            if (au32Array[u32HashTableIndex] == null)
+            if (acArray[u32HashTableIndex].bDeleteData(u32ID))
             {
-                Console.WriteLine("Not Found");
+                Console.WriteLine("Deleted");
             }
             else
             {
-                au32Array[u32HashTableIndex] = null;
-                Console.WriteLine("Deleted");
+                Console.WriteLine("Not Found");
             }
         }
 
@@ -76,21 +67,21 @@ namespace BinaryTrees_N_Hash
         {
             UInt32 u32HashTableIndex = 0;
             u32HashTableIndex = HashFunction(u32ID);
-            return au32Array[u32HashTableIndex];
+            return acArray[u32HashTableIndex].cGetNode(u32ID);
         }
     }
 
     static class FNV1a
     {
         /* http://www.isthe.com/chongo/tech/comp/fnv/index.html */
-        /* 32 bit FNV_prime = 224 + 28 + 0x93 = 16777619 */
+        /* 32 bit FNV_prime    = 224 + 28 + 0x93 = 16777619 */
         /* 32 bit offset_basis = 2166136261 */
 
         static public UInt32 u32Compute(UInt32 u32ID)
         {
             UInt32 u32Hash = 0;
             byte[] au8Byte;
-            const UInt32 u32FNVprime = 16777619;
+            const UInt32 u32FNVprime    = 16777619;
             const UInt32 u32OffsetBasis = 2166136261;
 
             au8Byte = BitConverter.GetBytes(u32ID);

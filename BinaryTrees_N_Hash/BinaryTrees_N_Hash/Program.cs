@@ -10,23 +10,10 @@ namespace BinaryTrees_N_Hash
     {
         static void Main(string[] args)
         {
-            BTree  cTree = new BTree();
-            Node[] cNode = new Node[10];
-
-            for (int i = 0; i < 9; i++)
-            {
-                cNode[i] = new Node(i.ToString(), "TEST", "TEST");
-                cTree.vInsertData(cNode[i]);
-            }
-
-            cTree.vPrintInorder(cTree.cGetRoot());
-            Console.ReadKey();
-
-
             HashTable myHT = new HashTable();
             string cKey;
             string sID;
-
+            Console.WriteLine("Q: Quit | S: Search | D: Delete | Add node ");
             cKey = Console.ReadLine();
             while (cKey != "q")
             {
@@ -38,7 +25,7 @@ namespace BinaryTrees_N_Hash
                     cTNode = myHT.Search(Convert.ToUInt32(sID));
                     if (cTNode != null)
                     {
-                        Console.WriteLine(cTNode.uGetID());
+                        Console.WriteLine(cTNode.sGetName());
                     }
                     else { Console.WriteLine("Not found"); }
                 }
@@ -50,7 +37,11 @@ namespace BinaryTrees_N_Hash
                 }
                 else
                 {
-                    myHT.Add(new Node());
+                    uint name;
+                    Random getRandom = new Random();
+                    name = (UInt32)getRandom.Next(1000);
+                    Console.WriteLine("NODE Created with ID " + name);
+                    myHT.Add(new Node(name.ToString(), "Address" ,"Phone" ));
                 }
                 cKey = Console.ReadLine();
             }

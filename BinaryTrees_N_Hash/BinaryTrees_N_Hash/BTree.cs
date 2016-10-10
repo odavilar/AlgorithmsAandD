@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BinaryTrees_N_Hash
 {
-    class BTree
+    public class BTree
     {
         private Node cRoot;
         private uint uCount;
@@ -46,7 +46,7 @@ namespace BinaryTrees_N_Hash
                         {
                             stNewNode.pParent = stParent;
                             stParent.pLeft    = stNewNode;
-                            return;
+                            break;
                         }
                     }
                     else
@@ -56,7 +56,7 @@ namespace BinaryTrees_N_Hash
                         {
                             stNewNode.pParent = stParent;
                             stParent.pRight   = stNewNode;
-                            return;
+                            break;
                         }
                     }
                 }
@@ -90,8 +90,8 @@ namespace BinaryTrees_N_Hash
                 {
                     /* Left or Right child */
                     cChild_tmp   = (cDelete.pLeft == null) ? cDelete.pRight : cDelete.pLeft;
-                    cParent_tmp = cDelete.pParent;
-
+                    cParent_tmp  = cDelete.pParent;
+                    /* Check if parent is root */
                     if (cDelete == cParent_tmp.pLeft)
                     {
                         cParent_tmp.pLeft  = cChild_tmp;
