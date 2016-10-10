@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace BinaryTrees_N_Hash
 {
-
     /* Structs */
     struct UserInfo
     {
@@ -16,7 +15,7 @@ namespace BinaryTrees_N_Hash
     }
 
     /* Node Class */
-    class Node
+    public class Node
     {
         /* Unique ID Generator */
         private static uint uUniqueID = 1U;
@@ -46,6 +45,11 @@ namespace BinaryTrees_N_Hash
             stUserInfo.sName    = sName;
             stUserInfo.sAddress = sAddress;
             stUserInfo.sPhone   = sPhone;
+            /*
+            Random getRandom = new Random();
+            u32ID = (UInt32)getRandom.Next(1000);
+            Console.WriteLine("NODE Created with ID " + u32ID);
+             */
         }
 
         ~Node()
