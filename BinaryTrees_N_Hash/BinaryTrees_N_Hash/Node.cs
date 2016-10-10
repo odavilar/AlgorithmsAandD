@@ -19,10 +19,10 @@ namespace BinaryTrees_N_Hash
     class Node
     {
         /* Unique ID Generator */
-        private uint uUniqueID = 1U;
+        private static uint uUniqueID = 1U;
 
         /* Data Members */
-        public  uint     uID;
+        private uint     uID;
         public  Node     pLeft;
         public  Node     pRight;
         private UserInfo stUserInfo;
@@ -30,18 +30,73 @@ namespace BinaryTrees_N_Hash
         /* Functions */
         public Node()
         {
+            pLeft  = null;
+            pRight = null;
+            stUserInfo.sName    = "";
+            stUserInfo.sAddress = "";
+            stUserInfo.sPhone   = "";
+        }
+
+        public Node(string sName, string sAddress, string sPhone)
+        {
             uID    = uUniqueID++;
             pLeft  = null;
             pRight = null;
-            stUserInfo.sAddress = "";
-            stUserInfo.sName    = "";
-            stUserInfo.sPhone   = "";
-            Console.WriteLine("Node " + uID);
+            stUserInfo.sName    = sName;
+            stUserInfo.sAddress = sAddress;
+            stUserInfo.sPhone   = sPhone;
         }
 
         ~Node()
         {
 
+        }
+
+        public uint   uGetID()
+        {
+            return uID;
+        }
+
+        public string sGetName()
+        {
+            return stUserInfo.sName;
+        }
+
+        public string sGetAddress()
+        {
+            return stUserInfo.sAddress;
+        }
+
+        public string sGetPhone()
+        {
+            return stUserInfo.sPhone;
+        }
+
+        public void vSetName(string sName)
+        {
+            if (0 == this.uID)
+            {
+                uID = uUniqueID++;
+            }
+            stUserInfo.sName = sName;
+        }
+
+        public void vSetPhone(string sPhone)
+        {
+            if (0 == this.uID)
+            {
+                uID = uUniqueID++;
+            }
+            stUserInfo.sPhone = sPhone;
+        }
+
+        public void vSetAddress(string sAddress)
+        {
+            if (0 == this.uID)
+            {
+                uID = uUniqueID++;
+            }
+            stUserInfo.sName = sAddress;
         }
     }
 }

@@ -10,8 +10,16 @@ namespace BinaryTrees_N_Hash
     {
         static void Main(string[] args)
         {
-            Node cNode = new Node();
-            Console.WriteLine("HELLO WORLD");
+            BTree  cTree = new BTree();
+            Node[] cNode = new Node[10];
+
+            for (int i = 0; i < 9; i++)
+            {
+                cNode[i] = new Node(i.ToString(), "TEST", "TEST");
+                cTree.vInsertData(cNode[i]);
+            }
+
+            cTree.vPrintInorder(cTree.stGetRoot());
             Console.ReadKey();
         }
     }
