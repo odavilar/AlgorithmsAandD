@@ -8,43 +8,44 @@ namespace BinaryTrees_N_Hash
 {
     class BTree
     {
-        private Node stRoot;
+        private Node cRoot;
         private uint uCount;
 
         public BTree()
         { 
-            stRoot = null;
+            cRoot = null;
             uCount = 0;
         }
 
-        public Node stGetRoot()
+        public Node cGetRoot()
         {
-            return stRoot;
+            return cRoot;
         }
 
-        public void vInsertData(Node stData)
+        public void vInsertData(Node cData)
         {
             Node stNewNode = new Node();
-            stNewNode      = stData;
+            stNewNode      = cData;
 
-            if (stRoot == null)
+            if (cRoot == null)
             {
-                stRoot = stNewNode;
+                cRoot = stNewNode;
             }
             else
             {
-                Node stCurrent = stRoot;
+                Node stCurrent = cRoot;
                 Node stParent;
 
                 while (true)
                 {
                     stParent = stCurrent;
-                    if (stData.uGetID() < stCurrent.uGetID())
+                    if (cData.uGetID() < stCurrent.uGetID())
                     {
                         stCurrent = stCurrent.pLeft;
                         if (stCurrent == null)
                         {
-                            stParent.pLeft = stNewNode;
+                            stNewNode.pParent = stParent;
+                            stParent.pLeft    = stNewNode;
                             return;
                         }
                     }
@@ -53,7 +54,8 @@ namespace BinaryTrees_N_Hash
                         stCurrent = stCurrent.pRight;
                         if (stCurrent == null)
                         {
-                            stParent.pRight = stNewNode;
+                            stNewNode.pParent = stParent;
+                            stParent.pRight   = stNewNode;
                             return;
                         }
                     }
@@ -63,37 +65,107 @@ namespace BinaryTrees_N_Hash
             uCount++;
         }
 
-        public Node stGetNode(uint uNodeID)
+        public bool bDeleteData(uint uIDToDelete)
         {
-            Node stCurrent = stRoot;
+            Node cDelete = this.cGetNode(uIDToDelete);
+            Node cParent_tmp;
+            Node cChild_tmp;
 
-            while (stCurrent != null)
+            if (cDelete != null)
             {
-                if (stCurrent.uGetID() == uNodeID)
+                if ((cDelete.pLeft == null) && (cDelete.pRight == null))
                 {
-                    return stCurrent;
+                    /* Leaf Node */
+                    cParent_tmp = cDelete.pParent;
+                    if (cDelete == cParent_tmp.pLeft)
+                    {
+                        cParent_tmp.pLeft = null;
+                    }
+                    else
+                    {
+                        cParent_tmp.pRight = null;
+                    }
                 }
-                else if (stCurrent.uGetID() < uNodeID)
+                else if ((cDelete.pLeft == null) || (cDelete.pRight == null))
                 {
-                    stCurrent = stCurrent.pRight;
+                    /* Left or Right child */
+                    cChild_tmp   = (cDelete.pLeft == null) ? cDelete.pRight : cDelete.pLeft;
+                    cParent_tmp = cDelete.pParent;
+
+                    if (cDelete == cParent_tmp.pLeft)
+                    {
+                        cParent_tmp.pLeft  = cChild_tmp;
+                    }
+                    else
+                    {
+                        cParent_tmp.pRight = cChild_tmp;
+                    }
                 }
-                else if (stCurrent.uGetID() > uNodeID)
+                else if ((cDelete.pLeft != null) || (cDelete.pRight != null))
                 {
-                    stCurrent = stCurrent.pLeft;
+                    /* Node with two children */
+                    cChild_tmp = cMinValueNode(cDelete.pRight);
+
+                    /* Copy the inorder successor's content to this node */
+                    cDelete.vCopyNodeInfo(cChild_tmp);
+
+                    /* Delete the inorder successor */
+                    this.bDeleteData(cChild_tmp.uGetID());
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public Node cGetNode(uint uNodeID)
+        {
+            Node cCurrent = cRoot;
+
+            while (cCurrent != null)
+            {
+                if (cCurrent.uGetID() == uNodeID)
+                {
+                    return cCurrent;
+                }
+                else if (cCurrent.uGetID() < uNodeID)
+                {
+                    cCurrent = cCurrent.pRight;
+                }
+                else if (cCurrent.uGetID() > uNodeID)
+                {
+                    cCurrent = cCurrent.pLeft;
                 }
             }
 
             return null;
         }
 
-        public void vPrintInorder(Node stRoot)
+        public  void vPrintInorder(Node cRoot)
         {
-            if (stRoot != null)
+            if (cRoot != null)
             {
-                vPrintInorder(stRoot.pLeft);
-                Console.Write(stRoot.uGetID() + " ");
-                vPrintInorder(stRoot.pRight);
+                vPrintInorder(cRoot.pLeft);
+                Console.Write(cRoot.uGetID() + " ");
+                vPrintInorder(cRoot.pRight);
             }
         }
+
+        private Node cMinValueNode(Node cNode)
+        {
+            Node cCurrent = cNode;
+ 
+            /* loop down to find the leftmost leaf */
+            while (cCurrent.pLeft != null)
+            {
+                cCurrent = cCurrent.pLeft;
+            }
+
+            return cCurrent;
+        }
+ 
     }
 }

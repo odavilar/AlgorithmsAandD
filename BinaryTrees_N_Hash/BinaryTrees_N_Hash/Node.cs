@@ -25,6 +25,7 @@ namespace BinaryTrees_N_Hash
         private uint     uID;
         public  Node     pLeft;
         public  Node     pRight;
+        public  Node     pParent;
         private UserInfo stUserInfo;
 
         /* Functions */
@@ -97,6 +98,14 @@ namespace BinaryTrees_N_Hash
                 uID = uUniqueID++;
             }
             stUserInfo.sName = sAddress;
+        }
+
+        public void vCopyNodeInfo(Node cSource)
+        {
+            uID                 = cSource.uGetID();
+            stUserInfo.sName    = cSource.sGetName();
+            stUserInfo.sAddress = cSource.sGetAddress();
+            stUserInfo.sPhone   = cSource.sGetPhone();
         }
     }
 }

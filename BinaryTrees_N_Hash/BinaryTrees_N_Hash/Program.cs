@@ -19,7 +19,7 @@ namespace BinaryTrees_N_Hash
                 cTree.vInsertData(cNode[i]);
             }
 
-            cTree.vPrintInorder(cTree.stGetRoot());
+            cTree.vPrintInorder(cTree.cGetRoot());
             Console.ReadKey();
         }
     }
