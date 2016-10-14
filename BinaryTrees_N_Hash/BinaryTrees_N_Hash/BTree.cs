@@ -166,6 +166,66 @@ namespace BinaryTrees_N_Hash
 
             return cCurrent;
         }
+
+
+        private uint uGetHeight(Node cNode)
+        {
+            return (cNode == null) ? 0 : cNode.uHeight;
+        }
+
+        private int iGetBalanceFactor(Node cNode)
+        {
+            return (int)uGetHeight(cNode.pRight) - (int)uGetHeight(cNode.pLeft);
+        }
+
+        private void vFixHeight(Node cNode)
+        {
+            uint uHeightLeft = uGetHeight(cNode.pLeft);
+            uint uHeightRight = uGetHeight(cNode.pRight);
+            cNode.uHeight = ((uHeightLeft > uHeightRight) ? uHeightLeft : uHeightRight) + 1;
+        }
+
+        private Node cRotateRight(Node cNode)
+        {
+            Node cTempNode = cNode.pLeft;
+            cNode.pLeft = cTempNode.pRight;
+            cTempNode.pRight = cNode;
+            vFixHeight(cNode);
+            vFixHeight(cTempNode);
+            return cTempNode;
+        }
+
+        private Node cRotateLeft(Node cNode)
+        {
+            Node cTempNode = cNode.pRight;
+            cNode.pRight = cTempNode.pLeft;
+            cTempNode.pLeft = cNode;
+            vFixHeight(cNode);
+            vFixHeight(cTempNode);
+            return cTempNode;
+        }
+
+        private Node cBalance(Node cNode)
+        {
+            vFixHeight(cNode);
+            if (iGetBalanceFactor(cNode) == 2)
+            {
+                if (iGetBalanceFactor(cNode.pRight) < 0)
+                {
+                    cNode.pRight = cRotateRight(cNode.pRight);
+                }
+                return cRotateLeft(cNode);
+            }
+            if (iGetBalanceFactor(cNode) == -2)
+            {
+                if (iGetBalanceFactor(cNode.pLeft) > 0)
+                {
+                    cNode.pLeft = cRotateLeft(cNode.pLeft);
+                }
+                return cRotateRight(cNode);
+            }
+            return cNode;
+        }
  
     }
 }

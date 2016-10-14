@@ -23,6 +23,7 @@ namespace BinaryTrees_N_Hash
 
         /* Data Members */
         private uint     uID;
+        public  uint     uHeight;
         public  Node     pLeft;
         public  Node     pRight;
         public  Node     pParent;
@@ -46,6 +47,7 @@ namespace BinaryTrees_N_Hash
             stUserInfo.sName    = sName;
             stUserInfo.sAddress = sAddress;
             stUserInfo.sPhone   = sPhone;
+            uHeight = 1;
         }
 
         ~Node()
