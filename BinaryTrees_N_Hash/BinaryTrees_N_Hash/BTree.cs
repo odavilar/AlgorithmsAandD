@@ -24,45 +24,65 @@ namespace BinaryTrees_N_Hash
 
         public void vInsertData(Node cData)
         {
-            Node stNewNode = new Node();
-            stNewNode      = cData;
+            cRoot = this.cInsertNode(cRoot, cData);
+            uCount++;
+        }
 
-            if (cRoot == null)
+        private Node cInsertNode(Node cCurrent, Node cInsert)
+        {
+            /* 1.  Perform the normal BST rotation */
+            if (null == cCurrent)
             {
-                cRoot = stNewNode;
+                Node cNewNode = new Node();
+                cNewNode = cInsert;
+                return cNewNode;
+            }
+
+            if (cInsert.uGetID() < cCurrent.uGetID())
+            {
+                cCurrent.pLeft = cInsertNode(cCurrent.pLeft, cInsert);
             }
             else
             {
-                Node stCurrent = cRoot;
-                Node stParent;
-
-                while (true)
-                {
-                    stParent = stCurrent;
-                    if (cData.uGetID() < stCurrent.uGetID())
-                    {
-                        stCurrent = stCurrent.pLeft;
-                        if (stCurrent == null)
-                        {
-                            stNewNode.pParent = stParent;
-                            stParent.pLeft    = stNewNode;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        stCurrent = stCurrent.pRight;
-                        if (stCurrent == null)
-                        {
-                            stNewNode.pParent = stParent;
-                            stParent.pRight   = stNewNode;
-                            break;
-                        }
-                    }
-                }
+                cCurrent.pRight = cInsertNode(cCurrent.pRight, cInsert);
             }
 
-            uCount++;
+            /* 2. Update height of this ancestor cNode */
+            this.vFixHeight(cCurrent);
+
+            /* 3. Get the balance factor of this ancestor cNode to check whether this cNode became unbalanced */
+            int iBalance = this.iGetBalanceFactor(cCurrent);
+
+            /* If this node becomes unbalanced, then there are 4 cases */
+
+            /* Left Left Case */
+            if ((iBalance > 1) && (cInsert.uGetID() < cCurrent.pLeft.uGetID()))
+            {
+                return cRotateRight(cCurrent);
+            }
+
+            /* Right Right Case */
+            if ((iBalance < -1) && (cInsert.uGetID() > cCurrent.pRight.uGetID()))
+            {
+                return cRotateLeft(cCurrent);
+            }
+
+            /* Left Right Case */
+            if ((iBalance > 1) && (cInsert.uGetID() > cCurrent.pLeft.uGetID()))
+            {
+                cCurrent.pLeft = cRotateLeft(cCurrent.pLeft);
+                return cRotateRight(cCurrent);
+            }
+
+            /* Right Left Case */
+            if ((iBalance < -1) && (cInsert.uGetID() < cCurrent.pRight.uGetID()))
+            {
+                cCurrent.pRight = cRotateRight(cCurrent.pRight);
+                return cRotateLeft(cCurrent);
+            }
+
+            /* return the (unchanged) cNode pointer */
+            return cCurrent;
         }
 
         public bool bDeleteData(uint uIDToDelete)
@@ -167,7 +187,7 @@ namespace BinaryTrees_N_Hash
             return cCurrent;
         }
 
-
+        /* Get height of the tree */
         private uint uGetHeight(Node cNode)
         {
             return (cNode == null) ? 0 : cNode.uHeight;
@@ -175,33 +195,52 @@ namespace BinaryTrees_N_Hash
 
         private int iGetBalanceFactor(Node cNode)
         {
-            return (int)uGetHeight(cNode.pRight) - (int)uGetHeight(cNode.pLeft);
+            if (null == cNode)
+            {
+                return 0;
+            }
+            else
+            {
+                return (int)uGetHeight(cNode.pLeft) - (int)uGetHeight(cNode.pRight);
+            }
         }
 
         private void vFixHeight(Node cNode)
         {
-            uint uHeightLeft = uGetHeight(cNode.pLeft);
+            uint uHeightLeft  = uGetHeight(cNode.pLeft);
             uint uHeightRight = uGetHeight(cNode.pRight);
+
+            /* Get maximum of two integers */
             cNode.uHeight = ((uHeightLeft > uHeightRight) ? uHeightLeft : uHeightRight) + 1;
         }
 
+        /* Right rotate subtree rooted with cNode */
         private Node cRotateRight(Node cNode)
         {
-            Node cTempNode = cNode.pLeft;
-            cNode.pLeft = cTempNode.pRight;
+            Node cTempNode   = cNode.pLeft;
+
+            cNode.pLeft      = cTempNode.pRight;
             cTempNode.pRight = cNode;
+
+            /* Update heights */
             vFixHeight(cNode);
             vFixHeight(cTempNode);
+
             return cTempNode;
         }
 
+        /* Left rotate subtree rooted with cNode */
         private Node cRotateLeft(Node cNode)
         {
-            Node cTempNode = cNode.pRight;
-            cNode.pRight = cTempNode.pLeft;
+            Node cTempNode  = cNode.pRight;
+
+            cNode.pRight    = cTempNode.pLeft;
             cTempNode.pLeft = cNode;
+
+            /* Update heights */
             vFixHeight(cNode);
             vFixHeight(cTempNode);
+
             return cTempNode;
         }
 
