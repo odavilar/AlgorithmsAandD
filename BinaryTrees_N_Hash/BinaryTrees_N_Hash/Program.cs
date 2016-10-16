@@ -41,7 +41,7 @@ namespace BinaryTrees_N_Hash
                     Random getRandom = new Random();
                     name = (UInt32)getRandom.Next(1000);
                     Console.WriteLine("NODE Created with ID " + name);
-                    myHT.Add(new Node(name.ToString(), "Address" ,"Phone" ));
+                    myHT.Add(new Node(name.ToString(), "LastName", "Address", "36XXXXXX", "33XXXXXXXX"));
                 }
                 cKey = Console.ReadLine();
             }
