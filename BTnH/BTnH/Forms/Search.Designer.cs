@@ -30,7 +30,7 @@
         {
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSearchField = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.showIDControl1 = new BTnH.showIDControl();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -50,12 +50,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "ID:";
             // 
-            // textBox1
+            // txtSearchField
             // 
-            this.textBox1.Location = new System.Drawing.Point(43, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 22);
-            this.textBox1.TabIndex = 1;
+            this.txtSearchField.Location = new System.Drawing.Point(43, 6);
+            this.txtSearchField.Name = "txtSearchField";
+            this.txtSearchField.Size = new System.Drawing.Size(115, 22);
+            this.txtSearchField.TabIndex = 1;
+            this.txtSearchField.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button1
             // 
@@ -65,6 +66,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // showIDControl1
             // 
@@ -81,7 +83,7 @@
             this.ClientSize = new System.Drawing.Size(552, 207);
             this.Controls.Add(this.showIDControl1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtSearchField);
             this.Controls.Add(this.label1);
             this.Name = "Search";
             this.Text = "Search";
@@ -96,7 +98,7 @@
 
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSearchField;
         private System.Windows.Forms.Label label1;
         private showIDControl showIDControl1;
     }

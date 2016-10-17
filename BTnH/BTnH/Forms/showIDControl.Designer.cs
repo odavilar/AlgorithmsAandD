@@ -36,13 +36,15 @@
             this.idLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.addLabel = new System.Windows.Forms.Label();
-            this.emailLabel = new System.Windows.Forms.Label();
+            this.phoneLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.mobileLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(30, 25);
+            this.pictureBox.Location = new System.Drawing.Point(30, 37);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(120, 117);
             this.pictureBox.TabIndex = 0;
@@ -80,9 +82,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(170, 114);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.Size = new System.Drawing.Size(53, 17);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Email:";
+            this.label4.Text = "Phone:";
             // 
             // idLabel
             // 
@@ -108,20 +110,39 @@
             this.addLabel.Size = new System.Drawing.Size(0, 17);
             this.addLabel.TabIndex = 7;
             // 
-            // emailLabel
+            // phoneLabel
             // 
-            this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(257, 114);
-            this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(0, 17);
-            this.emailLabel.TabIndex = 8;
+            this.phoneLabel.AutoSize = true;
+            this.phoneLabel.Location = new System.Drawing.Point(257, 114);
+            this.phoneLabel.Name = "phoneLabel";
+            this.phoneLabel.Size = new System.Drawing.Size(0, 17);
+            this.phoneLabel.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(170, 141);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 17);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Mobile:";
+            // 
+            // mobileLabel
+            // 
+            this.mobileLabel.AutoSize = true;
+            this.mobileLabel.Location = new System.Drawing.Point(257, 141);
+            this.mobileLabel.Name = "mobileLabel";
+            this.mobileLabel.Size = new System.Drawing.Size(0, 17);
+            this.mobileLabel.TabIndex = 10;
             // 
             // showIDControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.emailLabel);
+            this.Controls.Add(this.mobileLabel);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.phoneLabel);
             this.Controls.Add(this.addLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.idLabel);
@@ -131,7 +152,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox);
             this.Name = "showIDControl";
-            this.Size = new System.Drawing.Size(570, 171);
+            this.Size = new System.Drawing.Size(692, 183);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -148,6 +169,8 @@
         public System.Windows.Forms.Label idLabel;
         public System.Windows.Forms.Label nameLabel;
         public System.Windows.Forms.Label addLabel;
-        public System.Windows.Forms.Label emailLabel;
+        public System.Windows.Forms.Label phoneLabel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label mobileLabel;
     }
 }

@@ -25,14 +25,14 @@ namespace BTnH
 
         private void button1_Click(object sender, EventArgs e)
         {
-            User cUsuario = new User();
+            Node cUsuario;
             JObject json;
             Random rand = new Random();
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
 
             using (WebClient wc = new WebClient())
             {
-                var result = wc.DownloadString("http://api.randomuser.me/?exc=login,gender,registered,dob,phone,cell&nat=us,gb");
+                var result = wc.DownloadString("http://api.randomuser.me/?exc=login,gender,registered,dob&nat=us,gb");
                 json = JObject.Parse(result);
 
                 string title = (string)json["results"][0]["name"]["title"];
@@ -44,23 +44,21 @@ namespace BTnH
                 string postcode = (string)json["results"][0]["location"]["postcode"];
                 string picture = (string)json["results"][0]["picture"]["large"];
                 string email = (string)json["results"][0]["email"];
-                cUsuario.name.title = title;
-                cUsuario.name.first = first;
-                cUsuario.name.last = last;
-                cUsuario.location.street = street;
-                cUsuario.location.city = city;
-                cUsuario.location.state = state;
-                cUsuario.location.postcode = postcode;
-                cUsuario.picture = picture;
-                cUsuario.email = email;
-                cUsuario.id = rand.Next(100000,500000);
+                string phone = (string)json["results"][0]["phone"];
+                string cell = (string)json["results"][0]["cell"];
+
+                cUsuario = new Node(first, last, street + ", " + city + ", " + state + ", " + postcode, phone, cell);
+                cUsuario.vSetPicture(picture);
+                cUsuario.vSetEmail(email);
+
+                cHT.Add(cUsuario);
             }
 
-            showIDControl1.idLabel.Text = cUsuario.id.ToString();
-            showIDControl1.nameLabel.Text = textInfo.ToTitleCase(cUsuario.getName());
-            showIDControl1.addLabel.Text = textInfo.ToTitleCase(cUsuario.getAddress());
-            showIDControl1.emailLabel.Text = cUsuario.email;
-            showIDControl1.pictureBox.Load(cUsuario.picture);
+            showIDControl1.idLabel.Text = cUsuario.uGetID().ToString();
+            showIDControl1.nameLabel.Text = textInfo.ToTitleCase(cUsuario.sGetFullName());
+            showIDControl1.addLabel.Text = textInfo.ToTitleCase(cUsuario.sGetAddress());
+            showIDControl1.phoneLabel.Text = cUsuario.sGetEmail();
+            showIDControl1.pictureBox.Load(cUsuario.sGetPicture());
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -78,6 +76,26 @@ namespace BTnH
         {
             ListRecords ListRecordsWindow = new ListRecords();
             ListRecordsWindow.Show();
+        }
+
+        private void showIDControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    public static class cHT
+    {
+        public static HashTable HT = new HashTable();
+
+        public static void Add(Node cNode)
+        {
+            HT.Add(cNode);
+        }
+
+        public static Node cSearchUser(string sName, string sLastName)
+        {
+            return HT.cSearchUser(sName, sLastName);
         }
     }
 }
