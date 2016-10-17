@@ -45,7 +45,7 @@ namespace BinaryTrees_N_Hash
 
         public Node(string sName, string sLastName, string sAddress, string sPhone, string sMobile)
         {
-            uID     = uUniqueID++;
+            uID     = uGenerateID(sName, sLastName); ;
             pLeft   = null;
             pRight  = null;
             pParent = null;
@@ -65,7 +65,7 @@ namespace BinaryTrees_N_Hash
 
         public uint   uGetID()
         {
-            return uID;
+            return this.uID;
         }
 
         public string sGetName()
@@ -97,7 +97,7 @@ namespace BinaryTrees_N_Hash
         {
             if (0 == this.uID)
             {
-                this.uID = uUniqueID++;
+                this.uID = this.uGenerateID(sName, this.stUserInfo.sLastName);
             }
 
             this.stUserInfo.sName = (sName.Length <= 32) ? sName : sName.Substring(0, 32);
@@ -107,7 +107,7 @@ namespace BinaryTrees_N_Hash
         {
             if (0 == this.uID)
             {
-                uID = uUniqueID++;
+                this.uID = this.uGenerateID(this.stUserInfo.sName, sLastName);
             }
 
             this.stUserInfo.sLastName = (sLastName.Length <= 32) ? sLastName : sLastName.Substring(0, 32);
@@ -117,7 +117,7 @@ namespace BinaryTrees_N_Hash
         {
             if (0 == this.uID)
             {
-                uID = uUniqueID++;
+                this.uID = this.uGenerateID(this.stUserInfo.sName, this.stUserInfo.sLastName);
             }
 
             this.stUserInfo.sPhone = (sPhone.Length <= 12) ? sPhone : sPhone.Substring(0, 12);
@@ -127,7 +127,7 @@ namespace BinaryTrees_N_Hash
         {
             if (0 == this.uID)
             {
-                uID = uUniqueID++;
+                this.uID = this.uGenerateID(this.stUserInfo.sName, this.stUserInfo.sLastName);
             }
 
             this.stUserInfo.sMobile = (sMobile.Length <= 12) ? sMobile : sMobile.Substring(0, 12);
@@ -137,7 +137,7 @@ namespace BinaryTrees_N_Hash
         {
             if (0 == this.uID)
             {
-                uID = uUniqueID++;
+                this.uID = this.uGenerateID(this.stUserInfo.sName, this.stUserInfo.sLastName);
             }
 
             this.stUserInfo.sAddress = (sAddress.Length <= 64) ? sAddress : sAddress.Substring(0, 64);
@@ -151,6 +151,25 @@ namespace BinaryTrees_N_Hash
             stUserInfo.sAddress  = cSource.sGetAddress();
             stUserInfo.sPhone    = cSource.sGetPhone();
             stUserInfo.sMobile   = cSource.sGetMobile();
+        }
+
+        public uint   uGenerateID(string sName, string sLastName)
+        {
+            uint uID       = 0;
+            char[] cArray = sName.ToCharArray(0, sName.Length);
+
+            for (uint i = 0; i < sName.Length; i++)
+            {
+                uID += cArray[i] * i;
+            }
+            uID = uID << 16;
+
+            cArray = sLastName.ToCharArray(0, sLastName.Length);
+            for (int i = 0; i < sLastName.Length; i++)
+            {
+                uID += cArray[i];
+            }
+            return uID;
         }
     }
 }

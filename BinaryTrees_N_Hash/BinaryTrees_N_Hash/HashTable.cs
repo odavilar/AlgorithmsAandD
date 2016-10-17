@@ -63,6 +63,21 @@ namespace BinaryTrees_N_Hash
             }
         }
 
+        public Node cSearchUser(string sName, string sLastName)
+        {
+            UInt32 u32HashTableIndex = 0;
+            Node   cFound            = new Node();
+            uint   u32ID             = cFound.uGenerateID(sName, sLastName);
+            u32HashTableIndex        = HashFunction(u32ID);
+
+            if (null != acArray[u32HashTableIndex])
+            {
+                cFound = acArray[u32HashTableIndex].cGetNode(u32ID);
+            }
+
+            return cFound;
+        }
+
         public Node Search(UInt32 u32ID)
         {
             UInt32 u32HashTableIndex = 0;

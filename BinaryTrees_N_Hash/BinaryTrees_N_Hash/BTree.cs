@@ -11,18 +11,18 @@ namespace BinaryTrees_N_Hash
         private Node cRoot;
         private uint uCount;
 
-        public BTree()
+        public  BTree()
         { 
             cRoot = null;
             uCount = 0;
         }
 
-        public Node  cGetRoot()
+        public  Node cGetRoot()
         {
             return cRoot;
         }
 
-        public void  vInsertData(Node cData)
+        public  void vInsertData(Node cData)
         {
             cRoot = this.cInsertNode(cRoot, cData);
             uCount++;
@@ -87,7 +87,7 @@ namespace BinaryTrees_N_Hash
             return cCurrent;
         }
 
-        public bool  bDeleteData(uint uIDToDelete)
+        public  bool bDeleteData(uint uIDToDelete)
         {
             bool bDeleted = false;
 
@@ -190,7 +190,7 @@ namespace BinaryTrees_N_Hash
             return cCurrent;
         }
 
-        public Node  cGetNode(uint uNodeID)
+        public  Node cGetNode(uint uNodeID)
         {
             Node cCurrent = cRoot;
 
@@ -250,6 +250,7 @@ namespace BinaryTrees_N_Hash
             }
             else
             {
+                /* Left: + | Right: - */
                 return (int)uGetHeight(cNode.pLeft) - (int)uGetHeight(cNode.pRight);
             }
         }
