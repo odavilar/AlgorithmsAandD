@@ -142,12 +142,15 @@ namespace BTnH
                     string sFirstName;
                     string sLastName;
                     TextBox nameTextBox = showIDControl1.nameText;
+                    Node cTNode;
                     int index = nameTextBox.Text.IndexOf(' ');
                     if (index > 0)
                     {
                         sLastName = nameTextBox.Text.Substring(index + 1, nameTextBox.Text.Length - (index + 1));
                         sFirstName = nameTextBox.Text.Substring(0, index);
-                        cHT.vAdd(new Node(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName), textInfo.ToLower(showIDControl1.addText.Text), showIDControl1.phoneText.Text, showIDControl1.mobileText.Text));
+                        cTNode = new Node(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName), textInfo.ToLower(showIDControl1.addText.Text), showIDControl1.phoneText.Text, showIDControl1.mobileText.Text);
+                        cHT.vAdd(cTNode);
+                        showIDControl1.idText.Text = cTNode.uGetID().ToString();
                         showIDControl1.vLockAllFields();
                         MessageBox.Show("Record Saved!.", "Success!");
                     }
@@ -193,6 +196,10 @@ namespace BTnH
                         if(cTNode.sGetPicture() != "")
                         {
                             showIDControl1.pictureBox.Load(cTNode.sGetPicture());
+                        }
+                        else
+                        {
+                            showIDControl1.pictureBox.Image = null;
                         }
                     }
                     else
