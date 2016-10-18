@@ -57,6 +57,13 @@ namespace BTnH
             this.mobileText.ReadOnly = false;
         }
 
+        public void vUnlockEditableFields()
+        {
+            this.addText.ReadOnly = false;
+            this.phoneText.ReadOnly = false;
+            this.mobileText.ReadOnly = false;
+        }
+
         public void vLockAllFields()
         {
             this.nameText.ReadOnly = true;

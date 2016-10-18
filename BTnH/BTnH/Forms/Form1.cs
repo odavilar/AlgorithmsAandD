@@ -213,7 +213,14 @@ namespace BTnH
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            showIDControl1.vUnlockAllFields();
+            if (showIDControl1.idText.Text != "")
+            {
+                showIDControl1.vUnlockEditableFields();
+            }
+            else
+            {
+                MessageBox.Show("No entry has been selected.", "Error!");
+            }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
