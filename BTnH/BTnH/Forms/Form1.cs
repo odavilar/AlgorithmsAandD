@@ -53,17 +53,17 @@ namespace BTnH
 
                 if (boIsJsonOk && json != null)
                 {
-                    string title = (string)json["results"][0]["name"]["title"];
-                    string first = (string)json["results"][0]["name"]["first"];
-                    string last = (string)json["results"][0]["name"]["last"];
-                    string street = (string)json["results"][0]["location"]["street"];
-                    string city = (string)json["results"][0]["location"]["city"];
-                    string state = (string)json["results"][0]["location"]["state"];
+                    string title    = (string)json["results"][0]["name"]["title"];
+                    string first    = (string)json["results"][0]["name"]["first"];
+                    string last     = (string)json["results"][0]["name"]["last"];
+                    string street   = (string)json["results"][0]["location"]["street"];
+                    string city     = (string)json["results"][0]["location"]["city"];
+                    string state    = (string)json["results"][0]["location"]["state"];
                     string postcode = (string)json["results"][0]["location"]["postcode"];
-                    string picture = (string)json["results"][0]["picture"]["large"];
-                    string email = (string)json["results"][0]["email"];
-                    string phone = (string)json["results"][0]["phone"];
-                    string cell = (string)json["results"][0]["cell"];
+                    string picture  = (string)json["results"][0]["picture"]["large"];
+                    string email    = (string)json["results"][0]["email"];
+                    string phone    = (string)json["results"][0]["phone"];
+                    string cell     = (string)json["results"][0]["cell"];
 
                     cUsuario = new Node(first, last, street + ", " + city + ", " + state + ", " + postcode, phone, cell);
                     cUsuario.vSetPicture(picture);
@@ -71,10 +71,10 @@ namespace BTnH
 
                     cHT.vAdd(cUsuario);
 
-                    showIDControl1.idText.Text = cUsuario.uGetID().ToString();
-                    showIDControl1.nameText.Text = textInfo.ToTitleCase(cUsuario.sGetFullName());
-                    showIDControl1.addText.Text = textInfo.ToTitleCase(cUsuario.sGetAddress());
-                    showIDControl1.phoneText.Text = cUsuario.sGetPhone();
+                    showIDControl1.idText.Text     = cUsuario.uGetID().ToString();
+                    showIDControl1.nameText.Text   = textInfo.ToTitleCase(cUsuario.sGetFullName());
+                    showIDControl1.addText.Text    = textInfo.ToTitleCase(cUsuario.sGetAddress());
+                    showIDControl1.phoneText.Text  = cUsuario.sGetPhone();
                     showIDControl1.mobileText.Text = cUsuario.sGetMobile();
                     showIDControl1.pictureBox.Load(cUsuario.sGetPicture());
                 }
@@ -146,9 +146,10 @@ namespace BTnH
                     int index = nameTextBox.Text.IndexOf(' ');
                     if (index > 0)
                     {
-                        sLastName = nameTextBox.Text.Substring(index + 1, nameTextBox.Text.Length - (index + 1));
+                        sLastName  = nameTextBox.Text.Substring(index + 1, nameTextBox.Text.Length - (index + 1));
                         sFirstName = nameTextBox.Text.Substring(0, index);
-                        cTNode = new Node(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName), textInfo.ToLower(showIDControl1.addText.Text), showIDControl1.phoneText.Text, showIDControl1.mobileText.Text);
+                        cTNode     = new Node(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName), textInfo.ToLower(showIDControl1.addText.Text),
+                                              showIDControl1.phoneText.Text, showIDControl1.mobileText.Text);
                         cHT.vAdd(cTNode);
                         showIDControl1.idText.Text = cTNode.uGetID().ToString();
                         showIDControl1.vLockAllFields();
@@ -182,17 +183,17 @@ namespace BTnH
                 int index = sID.IndexOf(' ');
                 if (index > 0)
                 {
-                    sLastName = sID.Substring(index + 1, sID.Length - (index + 1));
+                    sLastName  = sID.Substring(index + 1, sID.Length - (index + 1));
                     sFirstName = sID.Substring(0, index);
                     cTNode = cHT.cSearchUser(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName));
                     if (cTNode != null)
                     {
                         showIDControl1.vLockAllFields();
-                        showIDControl1.idText.Text = cTNode.uGetID().ToString();
-                        showIDControl1.addText.Text = textInfo.ToTitleCase(cTNode.sGetAddress());
-                        showIDControl1.nameText.Text = textInfo.ToTitleCase(cTNode.sGetFullName());
+                        showIDControl1.idText.Text     = cTNode.uGetID().ToString();
+                        showIDControl1.addText.Text    = textInfo.ToTitleCase(cTNode.sGetAddress());
+                        showIDControl1.nameText.Text   = textInfo.ToTitleCase(cTNode.sGetFullName());
                         showIDControl1.mobileText.Text = cTNode.sGetMobile();
-                        showIDControl1.phoneText.Text = cTNode.sGetPhone();
+                        showIDControl1.phoneText.Text  = cTNode.sGetPhone();
                         if(cTNode.sGetPicture() != "")
                         {
                             showIDControl1.pictureBox.Load(cTNode.sGetPicture());

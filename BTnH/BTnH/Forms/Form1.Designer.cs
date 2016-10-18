@@ -36,8 +36,8 @@
             this.manualRadioButton = new System.Windows.Forms.RadioButton();
             this.autoRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.showIDControl1 = new BTnH.showIDControl();
             this.editButton = new System.Windows.Forms.Button();
+            this.showIDControl1 = new BTnH.showIDControl();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +74,7 @@
             // searchTextBox
             // 
             this.searchTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.searchTextBox.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.searchTextBox.ForeColor = System.Drawing.Color.LightGray;
             this.searchTextBox.Location = new System.Drawing.Point(379, 27);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(264, 28);
@@ -127,15 +127,6 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             // 
-            // showIDControl1
-            // 
-            this.showIDControl1.AutoSize = true;
-            this.showIDControl1.Location = new System.Drawing.Point(12, 100);
-            this.showIDControl1.Name = "showIDControl1";
-            this.showIDControl1.Size = new System.Drawing.Size(677, 185);
-            this.showIDControl1.TabIndex = 3;
-            this.showIDControl1.Load += new System.EventHandler(this.showIDControl1_Load);
-            // 
             // editButton
             // 
             this.editButton.Location = new System.Drawing.Point(303, 291);
@@ -145,6 +136,15 @@
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
+            // showIDControl1
+            // 
+            this.showIDControl1.AutoSize = true;
+            this.showIDControl1.Location = new System.Drawing.Point(12, 100);
+            this.showIDControl1.Name = "showIDControl1";
+            this.showIDControl1.Size = new System.Drawing.Size(677, 185);
+            this.showIDControl1.TabIndex = 3;
+            this.showIDControl1.Load += new System.EventHandler(this.showIDControl1_Load);
             // 
             // Form1
             // 
