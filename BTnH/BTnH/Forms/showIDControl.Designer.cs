@@ -33,27 +33,28 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.idLabel = new System.Windows.Forms.Label();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.addLabel = new System.Windows.Forms.Label();
-            this.phoneLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.mobileLabel = new System.Windows.Forms.Label();
+            this.idText = new System.Windows.Forms.TextBox();
+            this.nameText = new System.Windows.Forms.TextBox();
+            this.addText = new System.Windows.Forms.TextBox();
+            this.phoneText = new System.Windows.Forms.TextBox();
+            this.mobileText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(30, 37);
+            this.pictureBox.Location = new System.Drawing.Point(30, 40);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(120, 117);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(170, 60);
+            this.label1.Location = new System.Drawing.Point(170, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 17);
             this.label1.TabIndex = 1;
@@ -62,7 +63,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 87);
+            this.label2.Location = new System.Drawing.Point(170, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 17);
             this.label2.TabIndex = 2;
@@ -80,79 +81,80 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(170, 114);
+            this.label4.Location = new System.Drawing.Point(170, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 17);
             this.label4.TabIndex = 4;
             this.label4.Text = "Phone:";
             // 
-            // idLabel
-            // 
-            this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(257, 33);
-            this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(0, 17);
-            this.idLabel.TabIndex = 5;
-            // 
-            // nameLabel
-            // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(257, 60);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(0, 17);
-            this.nameLabel.TabIndex = 6;
-            // 
-            // addLabel
-            // 
-            this.addLabel.AutoSize = true;
-            this.addLabel.Location = new System.Drawing.Point(257, 87);
-            this.addLabel.Name = "addLabel";
-            this.addLabel.Size = new System.Drawing.Size(0, 17);
-            this.addLabel.TabIndex = 7;
-            // 
-            // phoneLabel
-            // 
-            this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Location = new System.Drawing.Point(257, 114);
-            this.phoneLabel.Name = "phoneLabel";
-            this.phoneLabel.Size = new System.Drawing.Size(0, 17);
-            this.phoneLabel.TabIndex = 8;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(170, 141);
+            this.label5.Location = new System.Drawing.Point(170, 145);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 17);
             this.label5.TabIndex = 9;
             this.label5.Text = "Mobile:";
             // 
-            // mobileLabel
+            // idText
             // 
-            this.mobileLabel.AutoSize = true;
-            this.mobileLabel.Location = new System.Drawing.Point(257, 141);
-            this.mobileLabel.Name = "mobileLabel";
-            this.mobileLabel.Size = new System.Drawing.Size(0, 17);
-            this.mobileLabel.TabIndex = 10;
+            this.idText.Location = new System.Drawing.Point(260, 30);
+            this.idText.Name = "idText";
+            this.idText.ReadOnly = true;
+            this.idText.Size = new System.Drawing.Size(159, 22);
+            this.idText.TabIndex = 10;
+            // 
+            // nameText
+            // 
+            this.nameText.Location = new System.Drawing.Point(260, 58);
+            this.nameText.Name = "nameText";
+            this.nameText.ReadOnly = true;
+            this.nameText.Size = new System.Drawing.Size(321, 22);
+            this.nameText.TabIndex = 11;
+            // 
+            // addText
+            // 
+            this.addText.Location = new System.Drawing.Point(260, 86);
+            this.addText.Name = "addText";
+            this.addText.ReadOnly = true;
+            this.addText.Size = new System.Drawing.Size(321, 22);
+            this.addText.TabIndex = 12;
+            // 
+            // phoneText
+            // 
+            this.phoneText.Location = new System.Drawing.Point(260, 114);
+            this.phoneText.Name = "phoneText";
+            this.phoneText.ReadOnly = true;
+            this.phoneText.Size = new System.Drawing.Size(321, 22);
+            this.phoneText.TabIndex = 13;
+            // 
+            // mobileText
+            // 
+            this.mobileText.Location = new System.Drawing.Point(260, 142);
+            this.mobileText.Name = "mobileText";
+            this.mobileText.ReadOnly = true;
+            this.mobileText.Size = new System.Drawing.Size(321, 22);
+            this.mobileText.TabIndex = 14;
             // 
             // showIDControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.mobileLabel);
+            this.Controls.Add(this.mobileText);
+            this.Controls.Add(this.phoneText);
+            this.Controls.Add(this.addText);
+            this.Controls.Add(this.nameText);
+            this.Controls.Add(this.idText);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.phoneLabel);
-            this.Controls.Add(this.addLabel);
-            this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.idLabel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox);
             this.Name = "showIDControl";
-            this.Size = new System.Drawing.Size(692, 183);
+            this.Size = new System.Drawing.Size(670, 189);
+            this.Load += new System.EventHandler(this.showIDControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,11 +168,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.PictureBox pictureBox;
-        public System.Windows.Forms.Label idLabel;
-        public System.Windows.Forms.Label nameLabel;
-        public System.Windows.Forms.Label addLabel;
-        public System.Windows.Forms.Label phoneLabel;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label mobileLabel;
+        public System.Windows.Forms.TextBox idText;
+        public System.Windows.Forms.TextBox nameText;
+        public System.Windows.Forms.TextBox addText;
+        public System.Windows.Forms.TextBox phoneText;
+        public System.Windows.Forms.TextBox mobileText;
     }
 }

@@ -60,6 +60,7 @@ namespace BTnH
             this.vSetAddress(sAddress);
             this.vSetPhone(sPhone);
             this.vSetMobile(sMobile);
+            this.vSetPicture("");
         }
 
         ~Node()
