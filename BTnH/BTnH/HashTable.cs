@@ -74,6 +74,10 @@ namespace BTnH
             {
                 cFound = acArray[u32HashTableIndex].cGetNode(u32ID);
             }
+            else
+            {
+                cFound = null;
+            }
 
             return cFound;
         }

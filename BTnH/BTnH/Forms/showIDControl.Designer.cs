@@ -111,6 +111,7 @@
             this.nameText.ReadOnly = true;
             this.nameText.Size = new System.Drawing.Size(321, 22);
             this.nameText.TabIndex = 11;
+            this.nameText.MouseClick += new System.Windows.Forms.MouseEventHandler(this.nameText_MouseClick);
             // 
             // addText
             // 

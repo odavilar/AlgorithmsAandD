@@ -19,6 +19,7 @@ namespace BTnH
     public partial class Form1 : Form
     {
         private TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,9 +27,10 @@ namespace BTnH
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Node cUsuario;
-            JObject json = null;
-            bool boIsJsonOk = true;
+            Node    cUsuario;
+            JObject json       = null;
+            bool    boIsJsonOk = true;
+
             if (autoRadioButton.Checked)
             {
                 showIDControl1.vLockAllFields();
@@ -39,7 +41,7 @@ namespace BTnH
                     {
                         boIsJsonOk = true;
                         var result = wc.DownloadString("http://api.randomuser.me/?exc=login,gender,registered,dob&nat=us,gb");
-                        json = JObject.Parse(result);
+                        json       = JObject.Parse(result);
                     }
                     catch(WebException)
                     {
@@ -80,7 +82,7 @@ namespace BTnH
                 }
                 else
                 {
-                    MessageBox.Show("Fail creating an Automatic Input.", "Error!");
+                    MessageBox.Show("Fail creating an automatic input.", "CONNECTION ERROR");
                 }
             }
 
@@ -90,7 +92,6 @@ namespace BTnH
                 showIDControl1.vUnlockAllFields();
             }
         }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -120,7 +121,7 @@ namespace BTnH
 
         private void textBox1_Enter(object sender, EventArgs e)
         {
-            searchTextBox.Text = "";
+            searchTextBox.Text      = "";
             searchTextBox.ForeColor = Color.Black;
         }
 
@@ -128,64 +129,98 @@ namespace BTnH
         {
             if (searchTextBox.Text == "")
             {
-                searchTextBox.Text = "Name to search";
+                searchTextBox.Text      = "Name to search";
                 searchTextBox.ForeColor = Color.LightGray;
             }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if(showIDControl1.nameText.ReadOnly == false)
+            Node cTNode;
+
+            if (false == showIDControl1.nameText.ReadOnly)
             {
                 if(showIDControl1.boIsAllFilled())
                 {
-                    string sFirstName;
-                    string sLastName;
+                    string  sFirstName;
+                    string  sLastName;
                     TextBox nameTextBox = showIDControl1.nameText;
-                    Node cTNode;
+
                     int index = nameTextBox.Text.IndexOf(' ');
                     if (index > 0)
                     {
                         sLastName  = nameTextBox.Text.Substring(index + 1, nameTextBox.Text.Length - (index + 1));
                         sFirstName = nameTextBox.Text.Substring(0, index);
-                        cTNode     = new Node(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName), textInfo.ToLower(showIDControl1.addText.Text),
-                                              showIDControl1.phoneText.Text, showIDControl1.mobileText.Text);
-                        cHT.vAdd(cTNode);
-                        showIDControl1.idText.Text = cTNode.uGetID().ToString();
-                        showIDControl1.vLockAllFields();
-                        MessageBox.Show("Record Saved!.", "Success!");
+                        cTNode = cHT.cSearchUser(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName));
+                        if (cTNode == null)
+                        {
+                            cTNode = new Node(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName), textInfo.ToLower(showIDControl1.addText.Text),
+                            showIDControl1.phoneText.Text, showIDControl1.mobileText.Text);
+                            cHT.vAdd(cTNode);
+                            showIDControl1.idText.Text = cTNode.uGetID().ToString();
+                            showIDControl1.vLockAllFields();
+                            MessageBox.Show("Record saved", "SUCCESS");
+                        }
+                        else
+                        {
+                            showIDControl1.nameText.ForeColor = Color.Red;
+                            MessageBox.Show("User is already registered, please use another FirstName or LastName.", "DUPLICATE");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Name must be in the format: FirstName LastName.", "Error!");
+                        MessageBox.Show("Name must be in the format: FirstName LastName.", "ERROR");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please fill all fields.", "Error!");
+                    MessageBox.Show("Please fill all fields.", "ERROR");
+                }
+            }
+            else if (showIDControl1.boIsEditing())
+            {
+                if (showIDControl1.boIsAllFilled())
+                {
+                    cTNode = cHT.cSearchID(UInt32.Parse(showIDControl1.idText.Text));
+                    if (cTNode != null)
+                    {
+                        cTNode.vSetAddress(textInfo.ToLower(showIDControl1.addText.Text));
+                        cTNode.vSetPhone(showIDControl1.phoneText.Text);
+                        cTNode.vSetMobile(showIDControl1.mobileText.Text);
+                        showIDControl1.vLockAllFields();
+                        MessageBox.Show("Record saved", "SUCCESS");
+                    }
+                    else
+                    {
+                        MessageBox.Show("User couldn't be found.", "ERROR");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please fill all fields.", "ERROR");
                 }
             }
             else
             {
-                MessageBox.Show("First create new Manual Input.", "Error!");
+                MessageBox.Show("First create new manual Input.", "ERROR");
             }
         }
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            Node cTNode;
+            Node   cTNode;
             string sID = searchTextBox.Text;
             string sFirstName;
             string sLastName;
 
-            if (sID != "" && sID != "Name to search")
+            if ((sID != "") && (sID != "Name to search"))
             {
                 int index = sID.IndexOf(' ');
                 if (index > 0)
                 {
                     sLastName  = sID.Substring(index + 1, sID.Length - (index + 1));
                     sFirstName = sID.Substring(0, index);
-                    cTNode = cHT.cSearchUser(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName));
+                    cTNode     = cHT.cSearchUser(textInfo.ToLower(sFirstName), textInfo.ToLower(sLastName));
                     if (cTNode != null)
                     {
                         showIDControl1.vLockAllFields();
@@ -205,17 +240,17 @@ namespace BTnH
                     }
                     else
                     {
-                        MessageBox.Show("Record Not Found!.", "Error!");
+                        MessageBox.Show("Record not found.", "ERROR");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Name must be in the format: FirstName LastName.", "Error!");
+                    MessageBox.Show("Name must be in the format: FirstName LastName.", "ERROR");
                 }
             }
             else
             {
-                MessageBox.Show("Name must be in the format: FirstName LastName.", "Error!");
+                MessageBox.Show("Please enter a name to search.", "ERROR");
             }
         }
 
@@ -227,7 +262,7 @@ namespace BTnH
             }
             else
             {
-                MessageBox.Show("No entry has been selected.", "Error!");
+                MessageBox.Show("No entry has been selected.", "ERROR");
             }
         }
 
@@ -247,13 +282,24 @@ namespace BTnH
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Entry.", "Error!");
+                    MessageBox.Show("Invalid Entry.", "ERROR");
                 }
             }
             else
             {
-                MessageBox.Show("Invalid Entry.", "Error!");
+                MessageBox.Show("Invalid Entry.", "ERROR");
             }
+        }
+
+        private void autoRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            showIDControl1.vLockAllFields();
+        }
+
+        private void manualRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            showIDControl1.vClearAllFields();
+            showIDControl1.vUnlockAllFields();
         }
     }
 
@@ -269,6 +315,11 @@ namespace BTnH
         public static Node cSearchUser(string sName, string sLastName)
         {
             return HT.cSearchUser(sName, sLastName);
+        }
+
+        public static Node cSearchID(UInt32 u32ID)
+        {
+            return HT.Search(u32ID);
         }
 
         public static void vDelete(uint u32ID)

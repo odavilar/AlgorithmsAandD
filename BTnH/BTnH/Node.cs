@@ -21,9 +21,6 @@ namespace BTnH
     /* Node Class */
     public class Node
     {
-        /* Unique ID Generator */
-        private static uint uUniqueID = 1U;
-
         /* Data Members */
         private uint     uID;
         public  uint     uHeight;
@@ -43,8 +40,8 @@ namespace BTnH
             stUserInfo.sAddress  = "";
             stUserInfo.sPhone    = "";
             stUserInfo.sMobile   = "";
-            stUserInfo.sEmail = "";
-            stUserInfo.sPicture = "";
+            stUserInfo.sEmail    = "";
+            stUserInfo.sPicture  = "";
         }
 
         public Node(string sName, string sLastName, string sAddress, string sPhone, string sMobile)
@@ -191,6 +188,8 @@ namespace BTnH
             stUserInfo.sAddress  = cSource.sGetAddress();
             stUserInfo.sPhone    = cSource.sGetPhone();
             stUserInfo.sMobile   = cSource.sGetMobile();
+            stUserInfo.sEmail    = cSource.sGetEmail();
+            stUserInfo.sPicture  = cSource.sGetPicture();
         }
 
         public uint   uGenerateID(string sName, string sLastName)

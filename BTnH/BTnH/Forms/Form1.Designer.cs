@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -103,6 +104,7 @@
             this.manualRadioButton.TabIndex = 6;
             this.manualRadioButton.Text = "Manual Input";
             this.manualRadioButton.UseVisualStyleBackColor = true;
+            this.manualRadioButton.CheckedChanged += new System.EventHandler(this.manualRadioButton_CheckedChanged);
             // 
             // autoRadioButton
             // 
@@ -115,6 +117,7 @@
             this.autoRadioButton.TabStop = true;
             this.autoRadioButton.Text = "Automatic Input";
             this.autoRadioButton.UseVisualStyleBackColor = true;
+            this.autoRadioButton.CheckedChanged += new System.EventHandler(this.autoRadioButton_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -158,7 +161,9 @@
             this.Controls.Add(this.showIDControl1);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.searchButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Directorio";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
