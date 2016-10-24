@@ -28,6 +28,7 @@ namespace BTnH
             uCount++;
         }
 
+        /* http://www.geeksforgeeks.org/avl-tree-set-1-insertion/ */
         private Node cInsertNode(Node cCurrent, Node cInsert)
         {
             /* 1.  Perform the normal BST rotation */
@@ -97,6 +98,7 @@ namespace BTnH
             return bDeleted;
         }
 
+        /* http://www.geeksforgeeks.org/avl-tree-set-2-deletion/ */
         private Node cDeleteNode(Node cCurrent, uint uIDToDelete, ref bool rbDeleted)
         {
             /* 1: Perform a standard BST deletion */
