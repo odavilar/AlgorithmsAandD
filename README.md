@@ -1,2 +1,2 @@
-# DyAdeAlgoritmos
-Tareas de Diseño y Análisis de Algoritmos
+# AlgorithmsAandD
+Algorithms analysis and design exercises.
